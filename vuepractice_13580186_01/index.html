@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+	<html>
+
+	<head>
+		<title> 13580186_01 </title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+
+	<body>
+
+			<div id="app" class="container">
+
+				<div class="col-md-7 col-md-offset-3">
+
+					<div class="panel panel-default" >
+
+						
+						<div class="panel-heading">
+							<h3>Calculate</h3>
+						</div>
+
+						<div class="panel-body " >
+
+							
+
+							<div class="form-group">
+
+								<label>Input Number #1</label>
+								<input type="number" v-model="numbers[0]">
+
+								<div class="pull-right">
+									<label>Input Number #2</label>
+									<input type="number" v-model="numbers[1]">
+								</div>
+							</div>
+
+							<div class="form-group">
+
+								<label>Input Number #3</label>
+								<input type="number" v-model="numbers[2]">
+								
+								<div class="pull-right">								
+									<label>Input Number #4</label>
+									<input type="number" v-model="numbers[3]" >
+								</div>
+
+							</div>
+
+						</div> <!-- panel-body -->
+
+						<div class="panel-footer" >
+							<h3>Result</h3>  
+						</div>
+
+						<div class="panel-body" >
+							{{ mainCalculate }} 
+							<h4 v-if = " sum > 0 ">Min number is {{ min }} at #{{ indexMin }} </h4>
+							<h4 v-if = " sum > 0 ">Max number is {{ max }} at #{{ indexMax }} </h4>
+							<h4 v-if = " sum > 0 ">Sum is {{ DisplaySum }} {{ sum }}  </h4>
+							<h4 v-if = " sum > 0 ">Average is ( {{sum }} / {{ numbers.length }} ) = {{ avg }}  </h4>
+							<h4 v-else align="center">" Please Input Numbers "</h4>	
+						</div>
+					</div> <!-- panel -->
+				</div>
+			</div> <!-- app -->
+
+
+
+			<script type="text/javascript">
+				 new Vue({
+				 	el: '#app',
+				 	data: {
+				 		numbers: [ 0 , 0 , 0 ,0 ] ,
+				 		max: 0 ,
+				 		min: 0 ,
+				 		sum: 0 ,
+				 		avg: 0 ,
+				 		indexMax: 0,
+				 		indexMin: 0
+				 		
+				 	},
+				 	computed: {
+				 		mainCalculate: function() {
+				 			this.max = Math.max(...this.numbers)
+				 			this.min = Math.min(...this.numbers)
+				 			this.sum = 0
+				 			for (  var i = 0 ; i < this.numbers.length ; i++ ) { 
+				 				this.numbers[i] *= 1
+				 				this.sum += this.numbers[i]
+				 				if( this.numbers[i] == this.min)
+				 					this.indexMin = i+1
+				 				if( this.numbers[i] == this.max)
+				 					this.indexMax = i+1		 		
+				 			}
+				 			this.avg = this.sum / this.numbers.length
+				 		} ,
+				 		DisplaySum: function() {
+				 			let myStr = ' ( '
+				 			for (  var i = 0 ; i < this.numbers.length ; i++ ) { 
+				 				if ( i < this.numbers.length - 1 )
+				 					myStr += this.numbers[i] + ' + '	
+				 				else
+				 				 	myStr += this.numbers[i] + ' ) = '		
+				 			}
+
+				 			return myStr
+
+				 		}			 		
+				 	}
+				 })
+			</script>
+
+	</body>
+
+</html>

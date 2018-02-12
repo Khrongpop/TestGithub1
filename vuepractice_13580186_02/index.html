@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+	<html>
+
+	<head>
+		<title> 13580186_02 </title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+
+	<body>
+
+			<div id="app" class="container">
+
+				<div class="col-md-7 col-md-offset-3">
+
+					<div class="panel panel-default" >
+
+						
+						<div class="panel-heading">
+							<h3> Multiplication table </h3>
+
+						</div>
+
+						<div class="panel-body " >
+
+							<div class="form-group">
+								<label>Input X</label>
+								<input type="number" v-model="x">
+								
+								<div class="pull-right">
+									<label>Input Y</label>
+									<input type="number" v-model="y">
+								</div>
+							</div>
+							
+
+						</div> <!-- panel-body -->
+
+						<div class="panel-footer" >
+							<h4>Result X*Y Table</h4>
+
+						
+
+						</div>
+
+						<div class="panel-body">
+
+							<div class="form-group" v-if = "x > 0 && y >0">
+
+								<table class=" table table-bordered ">
+										
+										<tr>
+											<td></td>
+											<td v-for = "j in (x*1)+1 " class="success" align="center"> 
+												{{ GenX(j,x) }}
+											</td>
+										</tr>
+
+											<td class="danger"></td>
+											<td class="active"> </td>
+											<td v-for = "j in x*1 " class="info"> {{ j }} </td>
+
+										<tr v-for = "  i in y*1" > {{ i }}
+											
+												<td class="danger" align="center" > {{ GenY(i,y*1) }}  </td>
+												<td class="warning"> {{i}} </td>
+												<td v-for = " j in x*1 " > {{ genRow ( i,j )}} </td>
+
+										</tr>
+												
+
+								</table>
+							</div>
+
+							<h4 v-else align="center">" Please Input Numbers "</h4>	
+
+						</div>
+
+				
+
+
+
+
+					</div> <!-- panel -->
+				</div>
+			</div> <!-- app -->
+
+
+
+			<script type="text/javascript">
+				 new Vue({
+				 	el: '#app',
+				 	data: {
+				 		x: 0,
+				 		y: 0,
+				 		
+				 		
+				 	},
+				 	computed: {
+				 	
+					    
+				 	},
+				 	methods: {
+					  genRow: function(row,height) {
+					    	return row*height
+					    },
+					    GenX: function(X,count) {
+					    	
+					    	// if ( (X*1)  == 2)
+					    	// 	return 'x'
+					    	count *= 1
+					    	// count += 1
+					    	X*=1
+					    	X-=1
+					    	count /= 2
+					    	count = Math.round(count)
+					    	
+					    	if ( X == count) {
+					    	 // if ( (X-0.5 ) / count >= 0.45  && (X-0.5 ) / count <= 0.5 ) 
+					    		return 'x'
+					    	}
+					    	else 
+					    		return ''
+					    		// return X + ' % '+count + ' = ' + (X/count).toFixed(2)
+					    },
+					     GenY: function(Y,count) {
+					     	count *= 1
+					     	Y*=1
+					     	count /= 2
+					    	count = Math.round(count)
+					    	
+					    	if ( Y == count   )
+					    		return 'y'
+					    	else 
+					    		return ''
+					    }
+					    
+	  				}
+				 })
+			</script>
+
+	</body>
+
+</html>
